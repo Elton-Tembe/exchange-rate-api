@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,14 @@ public class RateController {
 	public Rate create(@RequestBody Rate rate) {
 		return this.service.save(rate);
 	}
-
+	
 	@GetMapping
-	public List<Rate> getaAllByCurrency(String fromCurrency){
-		return service.findAllByFromCurrency(fromCurrency);
+	public List<Rate> list(){
+		return service.findAll();
+	}
+
+	@GetMapping("/{fromCurrency}")
+	public List<Rate> listByCurrency(@PathVariable String fromCurrency){
+		return service.findAllByCurrency(fromCurrency);
 	}
 }

@@ -31,7 +31,7 @@ public class RateService {
 		return repository.findAll();
 	}
 	
-	public List<Rate> findAllByFromCurrency(String fromCurrency){
+	public List<Rate> findAllByCurrency(String fromCurrency){
 		return repository.findByFromCurrency(fromCurrency);
 	}
 
