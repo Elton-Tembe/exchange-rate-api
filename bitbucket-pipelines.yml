@@ -3,7 +3,7 @@ pipelines:
   default:
     - step:
         name: Build and test
-        image: maven:3.6.3
+        image: maven:3
         caches: 
           - maven
         script:
