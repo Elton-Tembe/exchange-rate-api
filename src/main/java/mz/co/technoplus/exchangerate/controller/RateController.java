@@ -2,6 +2,7 @@ package mz.co.technoplus.exchangerate.controller;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class RateController {
 	@GetMapping("/{fromCurrency}")
 	public Map<String, Object> listByCurrency(@PathVariable String fromCurrency){
 		Map<String, Object> mapFinal = new HashMap<>();
-	    Map<String, BigDecimal> mapRates = new HashMap<>();	    
+	    Map<String, BigDecimal> mapRates = new LinkedHashMap<>();//to preserve insertion order	    
 
 		List<Rate> rates = service.findAllByCurrency(fromCurrency);			
 		if(rates.isEmpty()) {
