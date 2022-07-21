@@ -20,7 +20,7 @@ import mz.co.technoplus.exchangerate.model.Rate;
 import mz.co.technoplus.exchangerate.service.RateService;
 
 @RestController
-@RequestMapping("/exchange-rates")
+@RequestMapping("/")
 @Slf4j
 public class RateController {
 	@Autowired
