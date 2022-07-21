@@ -1,6 +1,9 @@
 package mz.co.technoplus.exchangerate.controller;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +38,15 @@ public class RateController {
 	}
 
 	@GetMapping("/{fromCurrency}")
-	public List<Rate> listByCurrency(@PathVariable String fromCurrency){
-		return service.findAllByCurrency(fromCurrency);
+	public Map<String, BigDecimal> listByCurrency(@PathVariable String fromCurrency){
+	    Map<String, BigDecimal> map = new HashMap<>();
+		List<Rate> rates = service.findAllByCurrency(fromCurrency);		
+		for(Rate rate : rates) {
+		    map.put(rate.getToCurrency(), rate.getExchangeRate());
+		}	
+	    return map;
 	}
+	
+
+	
 }
