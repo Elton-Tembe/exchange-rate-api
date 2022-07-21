@@ -39,15 +39,22 @@ public class RateController {
 
 	@GetMapping("/{fromCurrency}")
 	public Map<String, Object> listByCurrency(@PathVariable String fromCurrency){
-	    Map<String, BigDecimal> mapRates = new HashMap<>();
+		Map<String, Object> mapFinal = new HashMap<>();
+	    Map<String, BigDecimal> mapRates = new HashMap<>();	    
+
+		List<Rate> rates = service.findAllByCurrency(fromCurrency);			
+		if(rates.isEmpty()) {
+			mapFinal.put("result","error");
+			mapFinal.put("error-type",String.format("unsupported-code %s", fromCurrency));
+			return mapFinal;
+		}
+		
 	    mapRates.put(fromCurrency, BigDecimal.valueOf(1));
-	    
-		List<Rate> rates = service.findAllByCurrency(fromCurrency);		
 		for(Rate rate : rates) {
 		    mapRates.put(rate.getToCurrency(), rate.getExchangeRate());
 		}	
 		
-		Map<String, Object> mapFinal = new HashMap<>();
+		mapFinal.put("result", "success");
 		mapFinal.put("baseCode", fromCurrency);
 		mapFinal.put("rates", mapRates);
 		

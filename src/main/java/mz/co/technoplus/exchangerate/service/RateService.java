@@ -32,7 +32,11 @@ public class RateService {
 	}
 	
 	public List<Rate> findAllByCurrency(String fromCurrency){
-		return repository.findByFromCurrency(fromCurrency);
+		List<Rate> rates = repository.findByFromCurrency(fromCurrency);
+//		if(rates.isEmpty()) {
+//			throw new EntityExistsException(String.format("unsupported-code %s  ", fromCurrency));
+//		}
+		return rates;
 	}
 
 }
