@@ -40,8 +40,8 @@ public class RateController {
 		return service.findAll();
 	}
 
-//	@CrossOrigin(origins = "http://localhost:4200/")
-//	@CrossOrigin(origins = "https://open.er-api.com/v6/latest/")
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "https://open.er-api.com/v6/latest")
 	@GetMapping("/{fromCurrency}")
 	public Map<String, Object> listByCurrency(@PathVariable String fromCurrency){
 		Map<String, Object> mapFinal = new HashMap<>();
