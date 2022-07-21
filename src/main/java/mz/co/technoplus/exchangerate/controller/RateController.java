@@ -38,13 +38,20 @@ public class RateController {
 	}
 
 	@GetMapping("/{fromCurrency}")
-	public Map<String, BigDecimal> listByCurrency(@PathVariable String fromCurrency){
-	    Map<String, BigDecimal> map = new HashMap<>();
+	public Map<String, Object> listByCurrency(@PathVariable String fromCurrency){
+	    Map<String, BigDecimal> mapRates = new HashMap<>();
+	    mapRates.put(fromCurrency, BigDecimal.valueOf(1));
+	    
 		List<Rate> rates = service.findAllByCurrency(fromCurrency);		
 		for(Rate rate : rates) {
-		    map.put(rate.getToCurrency(), rate.getExchangeRate());
+		    mapRates.put(rate.getToCurrency(), rate.getExchangeRate());
 		}	
-	    return map;
+		
+		Map<String, Object> mapFinal = new HashMap<>();
+		mapFinal.put("baseCode", fromCurrency);
+		mapFinal.put("rates", mapRates);
+		
+	    return mapFinal;
 	}
 	
 
